@@ -15,9 +15,8 @@ public class CalculatorView extends JFrame {
 
     public CalculatorView(int row, int column) {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(150 * row, 50 * column);
-        this.setLocation(350, 100);
-        this.setSize(800, 500);
+        this.setSize(frameSize(row, column));
+        this.setLocation(350, 200);
         this.setTitle("matrix calculator");
         this.setVisible(true);
 
@@ -108,5 +107,63 @@ public class CalculatorView extends JFrame {
 
     public void displayErrorMessage(String errorMessage) {
         JOptionPane.showMessageDialog(this, errorMessage);
+    }
+
+    public Dimension frameSize(int row, int column){
+        int width = 80;
+        int height = 200;
+        switch(row){
+            case(2):
+                width += 20;
+                break;
+            case(3):
+                width += 40;
+                break;
+            case(4):
+                width += 60;
+                break;
+            case(5):
+                width += 80;
+                break;
+            case(6):
+                width += 100;
+                break;
+            case(7):
+                width += 120;
+                break;
+            case(8):
+                width += 140;
+                break;
+            case(9):
+                width += 160;
+                break;
+        }
+        switch(column){
+            case(2):
+                height += 100;
+                break;
+            case(3):
+                height += 150;
+                break;
+            case(4):
+                height += 250;
+                break;
+            case(5):
+                height += 300;
+                break;
+            case(6):
+                height += 400;
+                break;
+            case(7):
+                height += 450;
+                break;
+            case(8):
+                height += 550;
+                break;
+            case(9):
+                height += 600;
+                break;
+        }
+        return new Dimension(height, width);
     }
 }
