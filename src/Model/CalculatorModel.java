@@ -1,20 +1,17 @@
 package Model;
 
-
-
-public class CalculatorModel{
+public class CalculatorModel {
     public int rows;
     public int columns;
 
     private int[][] resultMatrix;
 
-    public CalculatorModel(int rows, int columns){
+    public CalculatorModel(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
     }
 
-    public void addTwoMatrices(int[][] a, int[][] b){
-
+    public void addTwoMatrices(int[][] a, int[][] b) {
         int rows = a.length;
         int columns = a[0].length;
         int[][] result = new int[rows][columns];
@@ -26,7 +23,7 @@ public class CalculatorModel{
         resultMatrix = result;
     }
 
-    public void multiplyTwoMatrices(int[][] a, int[][] b){
+    public void multiplyTwoMatrices(int[][] a, int[][] b) {
         int rows = a.length;
         int columns = a[0].length;
         int[][] result = new int[rows][columns];
@@ -38,7 +35,7 @@ public class CalculatorModel{
         resultMatrix = result;
     }
 
-    public int[][] getMatrixValue(){
+    public int[][] getMatrixValue() {
         return resultMatrix;
     }
 }
