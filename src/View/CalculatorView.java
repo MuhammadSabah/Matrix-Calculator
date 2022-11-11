@@ -6,18 +6,22 @@ import java.awt.event.*;
 import java.util.HashMap;
 
 public class CalculatorView extends JFrame {
-    JButton calculateButton = new JButton("calculate");
+    JButton addBtn = new JButton("Add");
+    JButton subBtn = new JButton("Subtract");
+    JButton mulBtn = new JButton("Multiply");
     public int r1, c1;
     public int r2, c2;
-    private HashMap<String, JTextField> firstMatrixFields = new HashMap<>();
-    private HashMap<String, JTextField> secondMatrixFields = new HashMap<>();
-    private HashMap<String, JTextField> resultMatrixFields = new HashMap<>();
+    private final HashMap<String, JTextField> firstMatrixFields = new HashMap<>();
+    final private HashMap<String, JTextField> secondMatrixFields = new HashMap<>();
+    final private HashMap<String, JTextField> resultMatrixFields = new HashMap<>();
 
     public CalculatorView(int row, int column) {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(frameSize(row, column));
         this.setLocation(350, 200);
-        this.setTitle("matrix calculator");
+        this.setSize(500, 300);
+        this.setTitle("Matrix Calculator");
+        this.setResizable(false);
         this.setVisible(true);
 
         r1 = row;
@@ -29,17 +33,29 @@ public class CalculatorView extends JFrame {
         setHashmapIndex(secondMatrixFields, row * column);
         setHashmapIndex(resultMatrixFields, row * column);
 
+        //
+        JPanel fields = new JPanel();
+        fields.add(new JTextField(2));
+        fields.add(new JTextField(2));
+        fields.add(new JTextField(2));
+        fields.add(new JTextField(2));
+        //
+
         JPanel m1 = addFields(row, column, firstMatrixFields);
         JPanel m2 = addFields(row, column, secondMatrixFields);
         JPanel mainPanel = new JPanel();
         JPanel resultJPanel = addFields(row, column, resultMatrixFields);
-
+        JPanel btns = new JPanel(new GridLayout(3,1,10,5));
         mainPanel.add(m1);
         mainPanel.add(m2);
-        mainPanel.add(calculateButton);
+        btns.add(addBtn);
+        btns.add(subBtn);
+        btns.add(mulBtn);
+        mainPanel.add(btns);
         mainPanel.add(resultJPanel);
-
-        this.add(mainPanel);
+        this.setLayout(new BorderLayout());
+        this.add(fields, "North");
+        this.add(mainPanel, "Center");
     }
 
     public void setHashmapIndex(HashMap<String, JTextField> hashMap, int n) {
@@ -102,65 +118,65 @@ public class CalculatorView extends JFrame {
     }
 
     public void addCalculationListener(ActionListener calculationListener) {
-        calculateButton.addActionListener(calculationListener);
+        addBtn.addActionListener(calculationListener);
     }
 
     public void displayErrorMessage(String errorMessage) {
         JOptionPane.showMessageDialog(this, errorMessage);
     }
 
-    public Dimension frameSize(int r, int c){
+    public Dimension frameSize(int r, int c) {
         int width = 80;
         int height = 200;
-        switch(r){
-            case(2):
+        switch (r) {
+            case (2):
                 width += 20;
                 break;
-            case(3):
+            case (3):
                 width += 40;
                 break;
-            case(4):
+            case (4):
                 width += 60;
                 break;
-            case(5):
+            case (5):
                 width += 80;
                 break;
-            case(6):
+            case (6):
                 width += 100;
                 break;
-            case(7):
+            case (7):
                 width += 120;
                 break;
-            case(8):
+            case (8):
                 width += 140;
                 break;
-            case(9):
+            case (9):
                 width += 160;
                 break;
         }
-        switch(c){
-            case(2):
+        switch (c) {
+            case (2):
                 height += 100;
                 break;
-            case(3):
+            case (3):
                 height += 150;
                 break;
-            case(4):
+            case (4):
                 height += 250;
                 break;
-            case(5):
+            case (5):
                 height += 300;
                 break;
-            case(6):
+            case (6):
                 height += 400;
                 break;
-            case(7):
+            case (7):
                 height += 450;
                 break;
-            case(8):
+            case (8):
                 height += 550;
                 break;
-            case(9):
+            case (9):
                 height += 600;
                 break;
         }
