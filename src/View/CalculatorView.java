@@ -109,10 +109,10 @@ public class CalculatorView extends JFrame {
         JOptionPane.showMessageDialog(this, errorMessage);
     }
 
-    public Dimension frameSize(int row, int column){
+    public Dimension frameSize(int r, int c){
         int width = 80;
         int height = 200;
-        switch(row){
+        switch(r){
             case(2):
                 width += 20;
                 break;
@@ -138,7 +138,7 @@ public class CalculatorView extends JFrame {
                 width += 160;
                 break;
         }
-        switch(column){
+        switch(c){
             case(2):
                 height += 100;
                 break;
