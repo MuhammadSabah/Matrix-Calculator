@@ -5,47 +5,47 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
 
-public class CalculatorView extends JFrame {
-    JButton addBtn = new JButton("Add");
-    JButton subBtn = new JButton("Subtract");
-    JButton mulBtn = new JButton("Multiply");
+public class CalculatorView extends JFrame  implements ActionListener{
+    public JButton addBtn = new JButton("Add");
+    public JButton subBtn = new JButton("Subtract");
+    public JButton mulBtn = new JButton("Multiply");
     public int r1, c1;
     public int r2, c2;
+    JTextField firstRow;
+    JTextField firstColumn;
+    JTextField secondRow;
+    JTextField secondColumn;
+    JPanel m1;
+    JPanel m2;
+    JPanel resultJPanel;
     private final HashMap<String, JTextField> firstMatrixFields = new HashMap<>();
     final private HashMap<String, JTextField> secondMatrixFields = new HashMap<>();
     final private HashMap<String, JTextField> resultMatrixFields = new HashMap<>();
 
-    public CalculatorView(int row, int column) {
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(frameSize(row, column));
+    public CalculatorView(int row1, int column1, int row2, int column2) {
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        // this.setSize(frameSize(row, column));
         this.setLocation(350, 200);
         this.setSize(500, 300);
         this.setTitle("Matrix Calculator");
         this.setResizable(false);
         this.setVisible(true);
 
-        r1 = row;
-        c1 = column;
-        r2 = row;
-        c2 = column;
+        r1 = row1;
+        c1 = column1;
+        r2 = row2;
+        c2 = column2;
 
-        setHashmapIndex(firstMatrixFields, row * column);
-        setHashmapIndex(secondMatrixFields, row * column);
-        setHashmapIndex(resultMatrixFields, row * column);
+        setHashmapIndex(firstMatrixFields, row1 * column1);
+        setHashmapIndex(secondMatrixFields, row2 * column2);
+        setHashmapIndex(resultMatrixFields, row1 * column2);
 
-        //
-        JPanel fields = new JPanel();
-        fields.add(new JTextField(2));
-        fields.add(new JTextField(2));
-        fields.add(new JTextField(2));
-        fields.add(new JTextField(2));
-        //
+        m1 = addFields(row1, column1, firstMatrixFields);
+        m2 = addFields(row2, column2, secondMatrixFields);
+        resultJPanel = addFields(row1, column2, resultMatrixFields);
 
-        JPanel m1 = addFields(row, column, firstMatrixFields);
-        JPanel m2 = addFields(row, column, secondMatrixFields);
-        JPanel mainPanel = new JPanel();
-        JPanel resultJPanel = addFields(row, column, resultMatrixFields);
         JPanel btns = new JPanel(new GridLayout(3,1,10,5));
+        JPanel mainPanel = new JPanel();
         mainPanel.add(m1);
         mainPanel.add(m2);
         btns.add(addBtn);
@@ -54,7 +54,6 @@ public class CalculatorView extends JFrame {
         mainPanel.add(btns);
         mainPanel.add(resultJPanel);
         this.setLayout(new BorderLayout());
-        this.add(fields, "North");
         this.add(mainPanel, "Center");
     }
 
@@ -86,8 +85,8 @@ public class CalculatorView extends JFrame {
     public int[][] getFirstMatrix(int row, int column) {
         int index = 1;
         int[][] array = new int[row][column];
-        for (int i = 0; i < array[0].length; i++) {
-            for (int j = 0; j < array.length; j++) {
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[0].length; j++) {
                 array[i][j] = Integer.parseInt(firstMatrixFields.get(String.valueOf(index)).getText());
                 index++;
             }
@@ -98,8 +97,8 @@ public class CalculatorView extends JFrame {
     public int[][] getSecondMatrix(int row, int column) {
         int index = 1;
         int[][] array = new int[row][column];
-        for (int i = 0; i < array[0].length; i++) {
-            for (int j = 0; j < array.length; j++) {
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[0].length; j++) {
                 array[i][j] = Integer.parseInt(secondMatrixFields.get(String.valueOf(index)).getText());
                 index++;
             }
@@ -119,6 +118,23 @@ public class CalculatorView extends JFrame {
 
     public void addCalculationListener(ActionListener calculationListener) {
         addBtn.addActionListener(calculationListener);
+        subBtn.addActionListener(calculationListener);
+        mulBtn.addActionListener(calculationListener);
+    }
+
+    public void updateMatrixSizes(){
+        r1 = Integer.parseInt(firstRow.getText());
+        c1 = Integer.parseInt(firstColumn.getText());
+        r2 = Integer.parseInt(secondRow.getText());
+        c2 = Integer.parseInt(secondColumn.getText());
+
+        setHashmapIndex(firstMatrixFields, r1 * c1);
+        setHashmapIndex(secondMatrixFields, r2 * c2);
+        setHashmapIndex(resultMatrixFields, r1 * c2);
+
+        m1 = addFields(r1, c1, firstMatrixFields);
+        m2 = addFields(r2, c2, secondMatrixFields);
+        resultJPanel = addFields(r1, c2, resultMatrixFields);
     }
 
     public void displayErrorMessage(String errorMessage) {
@@ -182,4 +198,10 @@ public class CalculatorView extends JFrame {
         }
         return new Dimension(height, width);
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+    }
+
 }
