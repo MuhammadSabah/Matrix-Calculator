@@ -1,38 +1,36 @@
 package Model;
 
 public class CalculatorModel {
-    public int rows;
-    public int columns;
 
     private int[][] resultMatrix;
 
-    public CalculatorModel(int rows, int columns) {
-        this.rows = rows;
-        this.columns = columns;
+    public CalculatorModel(int row, int column){
+        resultMatrix = new int[row][column];
     }
 
     public void addTwoMatrices(int[][] a, int[][] b) {
-        int rows = a.length;
-        int columns = a[0].length;
-        int[][] result = new int[rows][columns];
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                result[i][j] = a[i][j] + b[i][j];
+        for (int i = 0; i < resultMatrix.length; i++) {
+            for (int j = 0; j < resultMatrix[0].length; j++) {
+                resultMatrix[i][j] = a[i][j] + b[i][j];
             }
         }
-        resultMatrix = result;
+    }
+
+    public void subTwoMatrices(int[][] a, int[][] b) {
+        for (int i = 0; i < resultMatrix.length; i++) {
+            for (int j = 0; j < resultMatrix[0].length; j++) {
+                resultMatrix[i][j] = a[i][j] - b[i][j];
+            }
+        }
     }
 
     public void multiplyTwoMatrices(int[][] a, int[][] b) {
-        int rows = a.length;
-        int columns = a[0].length;
-        int[][] result = new int[rows][columns];
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                result[i][j] = a[i][j] * b[i][j];
+        for (int i = 0; i < a[0].length; i++) {
+            for (int j = 0; j < b.length; j++) {
+                for (int k = 0; k < a.length; k++)
+                    resultMatrix[i][j] = b[j][k] * a[k][i];
             }
         }
-        resultMatrix = result;
     }
 
     public int[][] getMatrixValue() {

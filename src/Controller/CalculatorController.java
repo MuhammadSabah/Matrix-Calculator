@@ -22,16 +22,58 @@ public class CalculatorController {
             int[][] matrix1 = new int[calculatorView.r1][calculatorView.c1];
             int[][] matrix2 = new int[calculatorView.r2][calculatorView.c2];
 
-            try {
-                matrix1 = calculatorView.getFirstMatrix(matrix1[0].length, matrix1.length);
-                matrix2 = calculatorView.getSecondMatrix(matrix2[0].length, matrix2.length);
+            if(e.getSource() == calculatorView.addBtn){
+                if(matrix1[0].length != matrix2[0].length && matrix1.length != matrix2.length || matrix1[0].length != matrix2[0].length || matrix1.length != matrix2.length){                    calculatorView.displayErrorMessage("cannot add matrices");
+                }
+                else{
+                    try {
+                    matrix1 = calculatorView.getFirstMatrix(matrix1[0].length, matrix1.length);
+                    matrix2 = calculatorView.getSecondMatrix(matrix2[0].length, matrix2.length);
 
-                calculatorModel.addTwoMatrices(matrix1, matrix2);
+                    calculatorModel.addTwoMatrices(matrix1, matrix2);
 
-                calculatorView.setCalculationResult(calculatorModel.getMatrixValue());
+                    calculatorView.setCalculationResult(calculatorModel.getMatrixValue());
 
-            } catch (NumberFormatException ex) {
-                calculatorView.displayErrorMessage("Enter the matrix properly.");
+                } catch (NumberFormatException ex) {
+                    calculatorView.displayErrorMessage("Enter the matrix properly.");
+                    }
+                }
+            }
+            if(e.getSource() == calculatorView.subBtn){
+                if(matrix1[0].length != matrix2[0].length && matrix1.length != matrix2.length || matrix1[0].length != matrix2[0].length || matrix1.length != matrix2.length){
+                    calculatorView.displayErrorMessage("cannot subtract matrices");
+                }
+                else{
+                    try {
+                        matrix1 = calculatorView.getFirstMatrix(matrix1[0].length, matrix1.length);
+                        matrix2 = calculatorView.getSecondMatrix(matrix2[0].length, matrix2.length);
+
+                        calculatorModel.subTwoMatrices(matrix1, matrix2);
+
+                        calculatorView.setCalculationResult(calculatorModel.getMatrixValue());
+
+                    } catch (NumberFormatException ex) {
+                        calculatorView.displayErrorMessage("Enter the matrix properly.");
+                    }
+                }
+            }          
+            if(e.getSource() == calculatorView.mulBtn){
+                if(matrix2[0].length != matrix1.length){
+                    calculatorView.displayErrorMessage("cannot multiply matrices");
+                }
+                else{
+                    try {
+                        matrix1 = calculatorView.getFirstMatrix(matrix1[0].length, matrix1.length);
+                        matrix2 = calculatorView.getSecondMatrix(matrix2[0].length, matrix2.length);
+        
+                        calculatorModel.multiplyTwoMatrices(matrix1, matrix2);
+        
+                        calculatorView.setCalculationResult(calculatorModel.getMatrixValue());
+        
+                    } catch (NumberFormatException ex) {
+                        calculatorView.displayErrorMessage("Enter the matrix properly.");
+                    }
+                }
             }
         }
     }
