@@ -2,10 +2,13 @@ package Model;
 
 public class CalculatorModel {
 
+    private int row, column;
     private int[][] resultMatrix;
 
     public CalculatorModel(int row, int column){
         resultMatrix = new int[row][column];
+        this.row = row;
+        this.column = column;
     }
 
     public void addTwoMatrices(int[][] a, int[][] b) {
@@ -25,12 +28,14 @@ public class CalculatorModel {
     }
 
     public void multiplyTwoMatrices(int[][] a, int[][] b) {
+        int [][] result = new int[row][column];
         for (int i = 0; i < a[0].length; i++) {
             for (int j = 0; j < b.length; j++) {
-                for (int k = 0; k < a.length; k++)
-                    resultMatrix[i][j] = b[j][k] * a[k][i];
+                for (int k = 0; k < b[0].length; k++)
+                    result[i][j] += a[i][k] * b[k][j];
             }
         }
+        resultMatrix = result;
     }
 
     public int[][] getMatrixValue() {
