@@ -24,7 +24,7 @@ public class CalculatorView extends JFrame {
     private ArrayList<JTextField> resultMatrixFields = new ArrayList<>();
 
     public CalculatorView(int row, int column) {
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocation(350, 200);
         this.setSize(300, 200);
         this.setTitle("Matrix Calculator");
