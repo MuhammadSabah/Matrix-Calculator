@@ -1,9 +1,9 @@
-package Tests.TestClasses;
 
-import org.junit.Assert;
-import org.junit.Test;
 
 import Model.CalculatorModel;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 public class CalculatorTest {
 
     @Test
