@@ -19,14 +19,14 @@ public class CalculatorView extends JFrame {
     JPanel m1;
     JPanel m2;
     JPanel resultJPanel;
-    private ArrayList<JTextField> firstMatrixFields = new ArrayList<>();
-    private ArrayList<JTextField> secondMatrixFields = new ArrayList<>();
-    private ArrayList<JTextField> resultMatrixFields = new ArrayList<>();
+    final private ArrayList<JTextField> firstMatrixFields = new ArrayList<>();
+    final private ArrayList<JTextField> secondMatrixFields = new ArrayList<>();
+    final private ArrayList<JTextField> resultMatrixFields = new ArrayList<>();
 
     public CalculatorView(int row, int column) {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocation(350, 200);
-        this.setSize(300, 200);
+        this.setSize(400, 200);
         this.setTitle("Matrix Calculator");
         this.setResizable(false);
         this.setVisible(true);
@@ -53,6 +53,7 @@ public class CalculatorView extends JFrame {
         btns.add(addBtn);
         btns.add(subBtn);
         btns.add(mulBtn);
+
         this.add(btns, "South");
         this.add(mainPanel, "North");
     }
