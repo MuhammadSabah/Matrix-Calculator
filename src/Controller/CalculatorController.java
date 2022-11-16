@@ -15,6 +15,37 @@ public class CalculatorController {
         this.calculatorView.addCalculationListener(new calculationListener());
     }
 
+    public int[][] addTwoMatrices(int[][] a, int[][] b) {
+        int[][] result = calculatorModel.getResultMatrix();
+        for (int i = 0; i < result.length; i++) {
+            for (int j = 0; j < result[0].length; j++) {
+                result[i][j] = a[i][j] + b[i][j];
+            }
+        }
+        return result;
+    }
+
+    public int[][] subTwoMatrices(int[][] a, int[][] b) {
+        int[][] result = calculatorModel.getResultMatrix();
+        for (int i = 0; i < result.length; i++) {
+            for (int j = 0; j < result[0].length; j++) {
+                result[i][j] = a[i][j] - b[i][j];
+            }
+        }
+        return result;
+    }
+
+    public int[][] multiplyTwoMatrices(int[][] a, int[][] b) {
+        int [][] result = calculatorModel.getResultMatrix();
+        for (int i = 0; i < a[0].length; i++) {
+            for (int j = 0; j < b.length; j++) {
+                for (int k = 0; k < b[0].length; k++)
+                    result[i][j] += a[i][k] * b[k][j];
+            }
+        }
+        return result;
+    }
+
     class calculationListener implements ActionListener {
 
         @Override
@@ -30,9 +61,8 @@ public class CalculatorController {
                     matrix1 = calculatorView.getFirstMatrix(matrix1[0].length, matrix1.length);
                     matrix2 = calculatorView.getSecondMatrix(matrix2[0].length, matrix2.length);
 
-                    calculatorModel.addTwoMatrices(matrix1, matrix2);
-
-                    calculatorView.setCalculationResult(calculatorModel.getMatrixValue());
+                    calculatorModel.setResultMatrix(addTwoMatrices(matrix1, matrix2));
+                    calculatorView.setCalculationResult(calculatorModel.getResultMatrix());
 
                 } catch (NumberFormatException ex) {
                     calculatorView.displayErrorMessage("Enter the matrix properly.");
@@ -48,9 +78,8 @@ public class CalculatorController {
                         matrix1 = calculatorView.getFirstMatrix(matrix1[0].length, matrix1.length);
                         matrix2 = calculatorView.getSecondMatrix(matrix2[0].length, matrix2.length);
 
-                        calculatorModel.subTwoMatrices(matrix1, matrix2);
-
-                        calculatorView.setCalculationResult(calculatorModel.getMatrixValue());
+                        calculatorModel.setResultMatrix(subTwoMatrices(matrix1, matrix2));
+                        calculatorView.setCalculationResult(calculatorModel.getResultMatrix());
 
                     } catch (NumberFormatException ex) {
                         calculatorView.displayErrorMessage("Enter the matrix properly.");
@@ -66,9 +95,8 @@ public class CalculatorController {
                         matrix1 = calculatorView.getFirstMatrix(matrix1[0].length, matrix1.length);
                         matrix2 = calculatorView.getSecondMatrix(matrix2[0].length, matrix2.length);
         
-                        calculatorModel.multiplyTwoMatrices(matrix1, matrix2);
-        
-                        calculatorView.setCalculationResult(calculatorModel.getMatrixValue());
+                        calculatorModel.setResultMatrix(multiplyTwoMatrices(matrix1, matrix2));
+                        calculatorView.setCalculationResult(calculatorModel.getResultMatrix());
         
                     } catch (NumberFormatException ex) {
                         calculatorView.displayErrorMessage("Enter the matrix properly.");
